@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mployer Benefits Award ROI Calculator | The Lopez Group</title>
+  <meta name="description" content="Calculate the financial impact of earning a Mployer Benefits Award. Quantify retention savings, hiring speed gains, and offer acceptance improvements with this free ROI calculator.">
+  <link rel="canonical" href="https://thelopezgroup.com/mployer-roi-calculator.html">
+  <meta property="og:title" content="Mployer Benefits Award ROI Calculator | The Lopez Group">
+  <meta property="og:description" content="Quantify the financial impact of earning a benefits award. Free ROI calculator with retention, hiring speed, and offer acceptance projections.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thelopezgroup.com/mployer-roi-calculator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0a0f1c;
+      --ink-light: #1a2038;
+      --cream: #f5f0e8;
+      --cream-dark: #e8e0d4;
+      --warm: #d4a574;
+      --accent: #e85d3a;
+      --accent-hover: #d14e2d;
+      --text: #c8c4bc;
+      --text-muted: #7a7670;
+      --text-dark: #3a3530;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Manrope', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 15, 28, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(200, 196, 188, 0.06);
+    }
+
+    nav .logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links a:hover {
+      color: var(--cream);
+    }
+
+    /* Services dropdown */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-toggle {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .nav-dropdown-toggle:hover {
+      color: var(--cream);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 0.75rem);
+      left: -1rem;
+      background: var(--ink-light);
+      border: 1px solid rgba(200, 196, 188, 0.08);
+      padding: 0.5rem 0;
+      min-width: 240px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+      transition: all 0.2s ease;
+      z-index: 200;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.8rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-dropdown-menu a:hover {
+      background: rgba(232, 93, 58, 0.08);
+      color: var(--cream);
+    }
+
+    nav .cta-link {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      text-decoration: none;
+      border: 1px solid rgba(245, 240, 232, 0.25);
+      padding: 0.6rem 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    nav .cta-link:hover {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 201;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--ink);
+      z-index: 150;
+      padding: 6rem 5% 2rem;
+      flex-direction: column;
+      gap: 0;
+      overflow-y: auto;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-family: var(--sans);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(200, 196, 188, 0.06);
+      transition: color 0.2s;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--cream);
+    }
+
+    .mobile-nav .mobile-sub {
+      padding-left: 1.5rem;
+    }
+
+    .mobile-nav .mobile-sub a {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .mobile-nav .mobile-cta {
+      margin-top: 1.5rem;
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      text-decoration: none;
+      border: 1px solid rgba(245, 240, 232, 0.25);
+      padding: 0.8rem 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav .mobile-cta:hover {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 10rem 5% 5rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(232, 93, 58, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5.5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero .hero-text {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text);
+      max-width: 560px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Shared section */
+    .section-pad {
+      padding: 5rem 5%;
+    }
+
+    .eyebrow-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .eyebrow-label::before {
+      content: '';
+      width: 2rem;
+      height: 1px;
+    }
+
+    /* Calculator Layout */
+    .calculator {
+      background: var(--ink);
+      position: relative;
+    }
+
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 2.5rem;
+      max-width: 1200px;
+      align-items: start;
+    }
+
+    /* Inputs Panel */
+    .calc-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .input-section-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(200, 196, 188, 0.08);
+    }
+
+    .input-section-title:not(:first-child) {
+      margin-top: 2rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .input-group label span {
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--text-muted);
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrap .prefix {
+      position: absolute;
+      left: 0.85rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .input-wrap .suffix {
+      position: absolute;
+      right: 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream);
+      background: rgba(245, 240, 232, 0.04);
+      border: 1px solid rgba(200, 196, 188, 0.12);
+      padding: 0.75rem 0.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .input-wrap input.has-prefix {
+      padding-left: 1.75rem;
+    }
+
+    .input-wrap input.has-suffix {
+      padding-right: 2.25rem;
+    }
+
+    .input-wrap input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(232, 93, 58, 0.1);
+    }
+
+    /* Results Dashboard */
+    .calc-results {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .impact-card {
+      padding: 1.5rem 1.75rem;
+      border: 1px solid rgba(200, 196, 188, 0.08);
+      transition: border-color 0.3s;
+    }
+
+    .impact-card:hover {
+      border-color: rgba(200, 196, 188, 0.15);
+    }
+
+    .impact-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+    }
+
+    .impact-card-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--warm);
+    }
+
+    .impact-card-total {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      color: var(--cream);
+    }
+
+    .impact-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(200, 196, 188, 0.04);
+    }
+
+    .breakdown-row:last-child {
+      border-bottom: none;
+    }
+
+    .breakdown-row .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .breakdown-row .value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Summary Card */
+    .summary-card {
+      padding: 2rem 1.75rem;
+      border: 1px solid var(--accent);
+      background: rgba(232, 93, 58, 0.04);
+      position: relative;
+    }
+
+    .summary-card-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .summary-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(200, 196, 188, 0.06);
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-row .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .summary-row .value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .summary-row.roi-highlight {
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(232, 93, 58, 0.2);
+      border-bottom: none;
+    }
+
+    .summary-row.roi-highlight .label {
+      font-size: 1rem;
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    .roi-multiple {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    /* Copy row */
+    .copy-row {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .btn-copy {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      background: transparent;
+      border: 1px solid rgba(245, 240, 232, 0.2);
+      padding: 0.85rem 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-copy:hover {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    .btn-copy.copied {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--ink);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(200, 196, 188, 0.06);
+      padding: 3rem 5%;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1100px;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand .logo {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      color: var(--cream);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .footer-col h4 {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.3rem 0;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--cream);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding-top: 2rem;
+      border-top: 1px solid rgba(200, 196, 188, 0.06);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .calc-layout { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      .section-pad { padding: 4rem 5%; }
+      .hero { padding: 8rem 5% 3rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .impact-card-header { flex-direction: column; gap: 0.25rem; }
+      .roi-multiple { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="/" class="logo">The Lopez Group</a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle">Services</button>
+        <div class="nav-dropdown-menu">
+          <a href="/services/demand-generation-agency.html">Demand Generation</a>
+          <a href="/services/b2b-seo-agency.html">B2B SEO</a>
+          <a href="/services/b2b-saas-marketing-agency.html">B2B SaaS Marketing</a>
+          <a href="/services/b2b-content-marketing-agency.html">Content Marketing</a>
+        </div>
+      </div>
+      <a href="/blog/">Blog</a>
+      <a href="/#roi-calculator">ROI Calculator</a>
+      <a href="mailto:hello@thelopezgroup.com" class="cta-link">Book a Strategy Call</a>
+    </div>
+    <button class="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <a href="/">Home</a>
+    <a href="#">Services</a>
+    <div class="mobile-sub">
+      <a href="/services/demand-generation-agency.html">Demand Generation</a>
+      <a href="/services/b2b-seo-agency.html">B2B SEO</a>
+      <a href="/services/b2b-saas-marketing-agency.html">B2B SaaS Marketing</a>
+      <a href="/services/b2b-content-marketing-agency.html">Content Marketing</a>
+    </div>
+    <a href="/blog/">Blog</a>
+    <a href="/#roi-calculator">ROI Calculator</a>
+    <a href="mailto:hello@thelopezgroup.com" class="mobile-cta">Book a Strategy Call</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="eyebrow">ROI Calculator</p>
+    <h1>Mployer Benefits Award <em>ROI Calculator</em></h1>
+    <p class="hero-text">Quantify the financial impact of earning a benefits award. Plug in your company's numbers and see how retention savings, faster hiring, and better offer acceptance rates add up.</p>
+  </section>
+
+  <!-- Calculator -->
+  <section class="calculator section-pad" id="calculator">
+    <div class="calc-layout reveal">
+
+      <!-- Inputs -->
+      <div class="calc-inputs">
+        <p class="input-section-title">Company Snapshot</p>
+
+        <div class="input-group">
+          <label>Total Employees</label>
+          <div class="input-wrap">
+            <input type="text" id="in-employees" value="100" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Annual Voluntary Turnover <span>(%)</span></label>
+          <div class="input-wrap">
+            <input type="text" id="in-turnover" value="20" inputmode="numeric" class="has-suffix">
+            <span class="suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Average Salary</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="text" id="in-salary" class="has-prefix" value="80,000" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Annual Hires</label>
+          <div class="input-wrap">
+            <input type="text" id="in-hires" value="10" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Avg Time to Fill <span>(days)</span></label>
+          <div class="input-wrap">
+            <input type="text" id="in-timetofill" value="45" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Cost per Hire</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="text" id="in-costperhire" class="has-prefix" value="7,500" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Offer Acceptance Rate <span>(%)</span></label>
+          <div class="input-wrap">
+            <input type="text" id="in-acceptance" value="84" inputmode="numeric" class="has-suffix">
+            <span class="suffix">%</span>
+          </div>
+        </div>
+
+        <p class="input-section-title">Award Impact Assumptions</p>
+
+        <div class="input-group">
+          <label>Time to Fill Improvement <span>(%)</span></label>
+          <div class="input-wrap">
+            <input type="text" id="in-ttf-improve" value="10" inputmode="numeric" class="has-suffix">
+            <span class="suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Turnover Reduction <span>(percentage points)</span></label>
+          <div class="input-wrap">
+            <input type="text" id="in-turnover-reduce" value="2" inputmode="numeric" class="has-suffix">
+            <span class="suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Cost of Turnover <span>(% of salary)</span></label>
+          <div class="input-wrap">
+            <input type="text" id="in-turnover-cost" value="40" inputmode="numeric" class="has-suffix">
+            <span class="suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Offer Acceptance Improvement <span>(percentage points)</span></label>
+          <div class="input-wrap">
+            <input type="text" id="in-accept-improve" value="4" inputmode="numeric" class="has-suffix">
+            <span class="suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Workdays per Year</label>
+          <div class="input-wrap">
+            <input type="text" id="in-workdays" value="260" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Annual Award Investment</label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="text" id="in-investment" class="has-prefix" value="2,500" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="calc-results">
+
+        <!-- Retention Savings -->
+        <div class="impact-card">
+          <div class="impact-card-header">
+            <span class="impact-card-title">Retention Savings</span>
+            <span class="impact-card-total" id="out-retention">$64,000</span>
+          </div>
+          <div class="impact-breakdown">
+            <div class="breakdown-row">
+              <span class="label">Current exits / year</span>
+              <span class="value" id="out-exits">20</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Reduced exits</span>
+              <span class="value" id="out-reduced-exits">2.0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Cost per exit</span>
+              <span class="value" id="out-cost-per-exit">$32,000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hiring Speed Savings -->
+        <div class="impact-card">
+          <div class="impact-card-header">
+            <span class="impact-card-title">Hiring Speed Savings</span>
+            <span class="impact-card-total" id="out-hiring">$13,846</span>
+          </div>
+          <div class="impact-breakdown">
+            <div class="breakdown-row">
+              <span class="label">Days saved per hire</span>
+              <span class="value" id="out-days-saved">4.5</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Daily vacancy cost</span>
+              <span class="value" id="out-daily-cost">$308</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Savings per hire</span>
+              <span class="value" id="out-per-hire">$1,385</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer Acceptance Savings -->
+        <div class="impact-card">
+          <div class="impact-card-header">
+            <span class="impact-card-title">Offer Acceptance Savings</span>
+            <span class="impact-card-total" id="out-acceptance">$3,000</span>
+          </div>
+          <div class="impact-breakdown">
+            <div class="breakdown-row">
+              <span class="label">Fewer restarted searches</span>
+              <span class="value" id="out-fewer-searches">0.4</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Cost per restarted search</span>
+              <span class="value" id="out-search-cost">$7,500</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-card">
+          <p class="summary-card-label">Total ROI Summary</p>
+          <div class="summary-rows">
+            <div class="summary-row">
+              <span class="label">Total Annual Impact</span>
+              <span class="value" id="out-total">$80,846</span>
+            </div>
+            <div class="summary-row">
+              <span class="label">Award Investment</span>
+              <span class="value" id="out-investment">$2,500</span>
+            </div>
+            <div class="summary-row">
+              <span class="label">Net Gain</span>
+              <span class="value" id="out-net">$78,346</span>
+            </div>
+            <div class="summary-row roi-highlight">
+              <span class="label">ROI Multiple</span>
+              <span class="roi-multiple" id="out-roi">32.3x</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="copy-row">
+          <button class="btn-copy" id="btn-copy">Copy Business Case</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">The Lopez Group</a>
+        <p>Pipeline growth for B2B SaaS marketing leaders. We measure pipeline sourced and closed-won revenue&mdash;not impressions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/services/demand-generation-agency.html">Demand Generation</a>
+        <a href="/services/b2b-seo-agency.html">B2B SEO</a>
+        <a href="/services/b2b-saas-marketing-agency.html">B2B SaaS Marketing</a>
+        <a href="/services/b2b-content-marketing-agency.html">Content Marketing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/blog/">Blog</a>
+        <a href="/#roi-calculator">ROI Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="mailto:hello@thelopezgroup.com">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 The Lopez Group. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    /* ── Scroll reveal ── */
+    (function () {
+      var reveals = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      reveals.forEach(function (el, i) {
+        el.style.transitionDelay = (i % 2 === 1 ? '0.15s' : '0s');
+        observer.observe(el);
+      });
+    })();
+
+    /* ── Mployer Benefits Award ROI Calculator ── */
+    (function () {
+      // Input elements
+      var elEmployees = document.getElementById('in-employees');
+      var elTurnover = document.getElementById('in-turnover');
+      var elSalary = document.getElementById('in-salary');
+      var elHires = document.getElementById('in-hires');
+      var elTimeToFill = document.getElementById('in-timetofill');
+      var elCostPerHire = document.getElementById('in-costperhire');
+      var elAcceptance = document.getElementById('in-acceptance');
+
+      var elTtfImprove = document.getElementById('in-ttf-improve');
+      var elTurnoverReduce = document.getElementById('in-turnover-reduce');
+      var elTurnoverCost = document.getElementById('in-turnover-cost');
+      var elAcceptImprove = document.getElementById('in-accept-improve');
+      var elWorkdays = document.getElementById('in-workdays');
+      var elInvestment = document.getElementById('in-investment');
+
+      var btnCopy = document.getElementById('btn-copy');
+
+      function parseNum(str) {
+        return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
+      }
+
+      function fmtCurrency(n) {
+        return '$' + Math.round(n).toLocaleString('en-US');
+      }
+
+      function fmtNum(n) {
+        if (n % 1 === 0) return n.toLocaleString('en-US');
+        return n.toFixed(1);
+      }
+
+      function formatCurrencyInput(el) {
+        var raw = el.value.replace(/[^0-9]/g, '');
+        if (raw === '') { el.value = ''; return; }
+        el.value = parseInt(raw, 10).toLocaleString('en-US');
+      }
+
+      function calculate() {
+        // Read inputs
+        var totalEmployees = parseNum(elEmployees.value);
+        var turnoverRate = parseNum(elTurnover.value) / 100;
+        var avgSalary = parseNum(elSalary.value);
+        var annualHires = parseNum(elHires.value);
+        var timeToFill = parseNum(elTimeToFill.value);
+        var costPerHire = parseNum(elCostPerHire.value);
+
+        var timeToFillImprovement = parseNum(elTtfImprove.value) / 100;
+        var turnoverReduction = parseNum(elTurnoverReduce.value) / 100;
+        var costOfTurnoverPct = parseNum(elTurnoverCost.value) / 100;
+        var acceptanceImprovement = parseNum(elAcceptImprove.value) / 100;
+        var workdaysPerYear = parseNum(elWorkdays.value);
+        var awardInvestment = parseNum(elInvestment.value);
+
+        // Retention Impact
+        var exitsPerYear = totalEmployees * turnoverRate;
+        var reducedExits = totalEmployees * turnoverReduction;
+        var costPerExit = avgSalary * costOfTurnoverPct;
+        var retentionSavings = reducedExits * costPerExit;
+
+        // Faster Hiring Impact
+        var daysSaved = timeToFill * timeToFillImprovement;
+        var dailyVacancyCost = workdaysPerYear > 0 ? avgSalary / workdaysPerYear : 0;
+        var savingsPerHire = daysSaved * dailyVacancyCost;
+        var hiringSpeedSavings = savingsPerHire * annualHires;
+
+        // Offer Acceptance Impact
+        var fewerRestartedSearches = annualHires * acceptanceImprovement;
+        var acceptanceSavings = fewerRestartedSearches * costPerHire;
+
+        // Total ROI
+        var totalImpact = retentionSavings + hiringSpeedSavings + acceptanceSavings;
+        var netGain = totalImpact - awardInvestment;
+        var roiMultiple = awardInvestment > 0 ? totalImpact / awardInvestment : 0;
+
+        // Update Retention card
+        document.getElementById('out-retention').textContent = fmtCurrency(retentionSavings);
+        document.getElementById('out-exits').textContent = fmtNum(exitsPerYear);
+        document.getElementById('out-reduced-exits').textContent = fmtNum(reducedExits);
+        document.getElementById('out-cost-per-exit').textContent = fmtCurrency(costPerExit);
+
+        // Update Hiring Speed card
+        document.getElementById('out-hiring').textContent = fmtCurrency(hiringSpeedSavings);
+        document.getElementById('out-days-saved').textContent = fmtNum(daysSaved);
+        document.getElementById('out-daily-cost').textContent = fmtCurrency(dailyVacancyCost);
+        document.getElementById('out-per-hire').textContent = fmtCurrency(savingsPerHire);
+
+        // Update Acceptance card
+        document.getElementById('out-acceptance').textContent = fmtCurrency(acceptanceSavings);
+        document.getElementById('out-fewer-searches').textContent = fmtNum(fewerRestartedSearches);
+        document.getElementById('out-search-cost').textContent = fmtCurrency(costPerHire);
+
+        // Update Summary card
+        document.getElementById('out-total').textContent = fmtCurrency(totalImpact);
+        document.getElementById('out-investment').textContent = fmtCurrency(awardInvestment);
+        document.getElementById('out-net').textContent = fmtCurrency(netGain);
+        document.getElementById('out-roi').textContent = roiMultiple.toFixed(1) + 'x';
+      }
+
+      function buildSummary() {
+        var totalEmployees = parseNum(elEmployees.value);
+        var turnoverRate = parseNum(elTurnover.value);
+        var avgSalary = parseNum(elSalary.value);
+        var annualHires = parseNum(elHires.value);
+        var timeToFill = parseNum(elTimeToFill.value);
+        var costPerHire = parseNum(elCostPerHire.value);
+        var acceptanceRate = parseNum(elAcceptance.value);
+
+        var ttfImprove = parseNum(elTtfImprove.value);
+        var turnoverReduce = parseNum(elTurnoverReduce.value);
+        var turnoverCost = parseNum(elTurnoverCost.value);
+        var acceptImprove = parseNum(elAcceptImprove.value);
+        var workdays = parseNum(elWorkdays.value);
+        var investment = parseNum(elInvestment.value);
+
+        // Recalculate for summary
+        var reducedExits = totalEmployees * (turnoverReduce / 100);
+        var costPerExit = avgSalary * (turnoverCost / 100);
+        var retentionSavings = reducedExits * costPerExit;
+
+        var daysSaved = timeToFill * (ttfImprove / 100);
+        var dailyVacancyCost = workdays > 0 ? avgSalary / workdays : 0;
+        var hiringSpeedSavings = daysSaved * dailyVacancyCost * annualHires;
+
+        var fewerSearches = annualHires * (acceptImprove / 100);
+        var acceptanceSavings = fewerSearches * costPerHire;
+
+        var totalImpact = retentionSavings + hiringSpeedSavings + acceptanceSavings;
+        var netGain = totalImpact - investment;
+        var roiMultiple = investment > 0 ? totalImpact / investment : 0;
+
+        var lines = [
+          'Mployer Benefits Award \u2014 ROI Business Case',
+          '\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500',
+          '',
+          'Company Snapshot:',
+          '\u2022 Total Employees: ' + totalEmployees.toLocaleString('en-US'),
+          '\u2022 Annual Voluntary Turnover: ' + turnoverRate + '%',
+          '\u2022 Average Salary: ' + fmtCurrency(avgSalary),
+          '\u2022 Annual Hires: ' + annualHires,
+          '\u2022 Avg Time to Fill: ' + timeToFill + ' days',
+          '\u2022 Cost per Hire: ' + fmtCurrency(costPerHire),
+          '\u2022 Offer Acceptance Rate: ' + acceptanceRate + '%',
+          '',
+          'Projected Annual Impact:',
+          '',
+          '  Retention Savings:       ' + fmtCurrency(retentionSavings),
+          '    ' + reducedExits.toFixed(1) + ' fewer exits \u00D7 ' + fmtCurrency(costPerExit) + ' per exit',
+          '',
+          '  Hiring Speed Savings:    ' + fmtCurrency(hiringSpeedSavings),
+          '    ' + daysSaved.toFixed(1) + ' days saved \u00D7 ' + fmtCurrency(dailyVacancyCost) + '/day \u00D7 ' + annualHires + ' hires',
+          '',
+          '  Offer Acceptance Savings: ' + fmtCurrency(acceptanceSavings),
+          '    ' + fewerSearches.toFixed(1) + ' fewer restarted searches \u00D7 ' + fmtCurrency(costPerHire),
+          '',
+          '\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500',
+          '  Total Annual Impact:     ' + fmtCurrency(totalImpact),
+          '  Award Investment:        ' + fmtCurrency(investment),
+          '  Net Gain:                ' + fmtCurrency(netGain),
+          '  ROI:                     ' + roiMultiple.toFixed(1) + 'x',
+          '\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500',
+          '',
+          'Assumptions: ' + ttfImprove + '% faster time-to-fill, ' + turnoverReduce + ' pp turnover reduction,',
+          turnoverCost + '% of salary turnover cost, ' + acceptImprove + ' pp acceptance improvement.',
+          '',
+          'Generated with the Mployer Benefits Award ROI Calculator',
+          '\u2192 thelopezgroup.com/mployer-roi-calculator.html'
+        ];
+
+        return lines.join('\n');
+      }
+
+      // Currency inputs get formatting
+      [elSalary, elCostPerHire, elInvestment].forEach(function (el) {
+        el.addEventListener('input', function () { formatCurrencyInput(el); calculate(); });
+      });
+
+      // All other inputs just trigger recalculation
+      [elEmployees, elTurnover, elHires, elTimeToFill, elAcceptance,
+       elTtfImprove, elTurnoverReduce, elTurnoverCost, elAcceptImprove, elWorkdays].forEach(function (el) {
+        el.addEventListener('input', function () { calculate(); });
+      });
+
+      // Copy Business Case
+      btnCopy.addEventListener('click', function () {
+        var text = buildSummary();
+        navigator.clipboard.writeText(text).then(function () {
+          btnCopy.textContent = 'Copied!';
+          btnCopy.classList.add('copied');
+          setTimeout(function () {
+            btnCopy.textContent = 'Copy Business Case';
+            btnCopy.classList.remove('copied');
+          }, 2000);
+        });
+      });
+
+      // Initial calculation
+      calculate();
+    })();
+
+    /* ── Hamburger menu ── */
+    (function () {
+      var hamburger = document.querySelector('.hamburger');
+      var mobileNav = document.querySelector('.mobile-nav');
+      hamburger.addEventListener('click', function () {
+        hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+        document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+      });
+      var links = mobileNav.querySelectorAll('a');
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          hamburger.classList.remove('active');
+          mobileNav.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
